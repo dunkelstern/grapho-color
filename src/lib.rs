@@ -18,6 +18,11 @@
 //! 
 //! To make integration of the color types easy with existing software there are `From`-traits for importing a color from `Vec<u8>` and `u32` types.
 
+#[derive(Debug, PartialEq)]
+pub enum ColorConversionError {
+    BufferTooSmall
+}
+
 mod rgb;
 
 /// Types marked with this trait will be convertible to `DigitalRGBColor`

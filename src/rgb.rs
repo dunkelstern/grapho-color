@@ -1,3 +1,4 @@
+use std::convert::TryFrom;
 use crate::*;
 
 //
@@ -21,6 +22,44 @@ impl From<[u8; 4]> for DigitalRGBColor {
             g: octets[1],
             b: octets[2]
         }
+    }
+}
+
+impl From<&[u8; 3]> for DigitalRGBColor {
+    fn from(octets: &[u8; 3]) -> Self {
+        DigitalRGBColor{
+            r: octets[0],
+            g: octets[1],
+            b: octets[2]
+        }
+    }
+}
+
+impl From<&[u8; 4]> for DigitalRGBColor {
+    fn from(octets: &[u8; 4]) -> Self {
+        DigitalRGBColor{
+            r: octets[0],
+            g: octets[1],
+            b: octets[2]
+        }
+    }
+}
+
+impl TryFrom<&[u8]> for DigitalRGBColor {
+    type Error = ColorConversionError;
+
+    fn try_from(octets: &[u8]) -> Result<Self, ColorConversionError> {
+        if octets.len() < 3 {
+            return Err(ColorConversionError::BufferTooSmall);
+        }
+        
+        Ok(
+            DigitalRGBColor{
+                r: octets[0],
+                g: octets[1],
+                b: octets[2]
+            }
+        )
     }
 }
 

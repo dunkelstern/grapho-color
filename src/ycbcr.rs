@@ -1,3 +1,4 @@
+use std::convert::TryFrom;
 use crate::*;
 
 //
@@ -31,6 +32,45 @@ impl From<u32> for DigitalYCbCrColor {
             cb: (f >> 16 & 0xff) as u8,
             cr: (f >> 8  & 0xff) as u8,
         }
+    }
+}
+
+
+impl From<&[u8; 3]> for DigitalYCbCrColor {
+    fn from(octets: &[u8; 3]) -> Self {
+        DigitalYCbCrColor{
+            y: octets[0],
+            cb: octets[1],
+            cr: octets[2]
+        }
+    }
+}
+
+impl From<&[u8; 4]> for DigitalYCbCrColor {
+    fn from(octets: &[u8; 4]) -> Self {
+        DigitalYCbCrColor{
+            y: octets[0],
+            cb: octets[1],
+            cr: octets[2]
+        }
+    }
+}
+
+impl TryFrom<&[u8]> for DigitalYCbCrColor {
+    type Error = ColorConversionError;
+
+    fn try_from(octets: &[u8]) -> Result<Self, ColorConversionError> {
+        if octets.len() < 3 {
+            return Err(ColorConversionError::BufferTooSmall);
+        }
+        
+        Ok(
+            DigitalYCbCrColor{
+                y: octets[0],
+                cb: octets[1],
+                cr: octets[2]
+            }
+        )
     }
 }
 
