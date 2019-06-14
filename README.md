@@ -18,8 +18,10 @@ It contains color conversion functionality and will get SIMD acceleration in the
 
 Currently the following color types are implemented:
 
+- Normalized Grayscale (component values from 0.0 - 1.0)
 - Normalized RGB (component values from 0.0 - 1.0)
 - Normalized RGBA (component values from 0.0 - 1.0)
+- Digital Grayscale (1 byte)
 - Digital RGB (1 byte per channel)
 - Digital RGBA (1 byte per channel)
 - Normalized YCbCr (component values: Y -> 0.0 - 1.0, Cb/Cr -> -0.5 - 0.5)

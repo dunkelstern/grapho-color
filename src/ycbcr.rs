@@ -154,6 +154,50 @@ impl From<NormalizedYCbCrColor> for DigitalYCbCrColor {
     }
 }
 
+//
+// Gray to RGB
+//
+
+impl From<DigitalGrayscaleColor> for DigitalYCbCrColor {
+    fn from(f: DigitalGrayscaleColor) -> Self {
+        DigitalYCbCrColor {
+            y: f.v,
+            cb: 0,
+            cr: 0
+        }
+    }
+}
+
+impl From<DigitalGrayscaleColor> for NormalizedYCbCrColor {
+    fn from(f: DigitalGrayscaleColor) -> Self {
+        NormalizedYCbCrColor {
+            y: (f.v as f32) / 255.0,
+            cb: 0.0,
+            cr: 0.0
+        }
+    }
+}
+
+impl From<NormalizedGrayscaleColor> for DigitalYCbCrColor {
+    fn from(f: NormalizedGrayscaleColor) -> Self {
+        DigitalYCbCrColor {
+            y: (f.v * 255.0) as u8,
+            cb: 0,
+            cr: 0
+        }
+    }
+}
+
+impl From<NormalizedGrayscaleColor> for NormalizedYCbCrColor {
+    fn from(f: NormalizedGrayscaleColor) -> Self {
+        NormalizedYCbCrColor {
+            y: f.v,
+            cb: 0.0,
+            cr: 0.0
+        }
+    }
+}
+
 
 //
 // RGB to YCbCr

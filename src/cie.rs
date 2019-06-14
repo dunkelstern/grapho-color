@@ -64,6 +64,42 @@ fn xyz_to_lab_map(c: f32) -> f32 {
 }
 
 //
+// Gray to CIE
+//
+
+impl From<DigitalGrayscaleColor> for CIELabColor {
+    fn from(f: DigitalGrayscaleColor) -> Self {
+        CIELabColor {
+            l: (f.v as f32) / 255.0 * 100.0,
+            a: 0.0,
+            b: 0.0
+        }
+    }
+}
+
+impl From<NormalizedGrayscaleColor> for CIELabColor {
+    fn from(f: NormalizedGrayscaleColor) -> Self {
+        CIELabColor {
+            l: f.v * 100.0,
+            a: 0.0,
+            b: 0.0
+        }
+    }
+}
+
+impl From<DigitalGrayscaleColor> for CIEXYZColor {
+    fn from(f: DigitalGrayscaleColor) -> Self {
+        CIEXYZColor::from(CIELabColor::from(f))
+    }
+}
+
+impl From<NormalizedGrayscaleColor> for CIEXYZColor {
+    fn from(f: NormalizedGrayscaleColor) -> Self {
+        CIEXYZColor::from(CIELabColor::from(f))
+    }
+}
+
+//
 // RGB to CIE
 //
 

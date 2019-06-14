@@ -154,6 +154,50 @@ impl From<DigitalRGBColor> for NormalizedRGBColor {
 }
 
 //
+// Gray to RGB
+//
+
+impl From<DigitalGrayscaleColor> for DigitalRGBColor {
+    fn from(f: DigitalGrayscaleColor) -> Self {
+        DigitalRGBColor {
+            r: f.v,
+            g: f.v,
+            b: f.v
+        }
+    }
+}
+
+impl From<DigitalGrayscaleColor> for NormalizedRGBColor {
+    fn from(f: DigitalGrayscaleColor) -> Self {
+        NormalizedRGBColor {
+            r: (f.v as f32) / 255.0,
+            g: (f.v as f32) / 255.0,
+            b: (f.v as f32) / 255.0
+        }
+    }
+}
+
+impl From<NormalizedGrayscaleColor> for DigitalRGBColor {
+    fn from(f: NormalizedGrayscaleColor) -> Self {
+        DigitalRGBColor {
+            r: (f.v * 255.0) as u8,
+            g: (f.v * 255.0) as u8,
+            b: (f.v * 255.0) as u8
+        }
+    }
+}
+
+impl From<NormalizedGrayscaleColor> for NormalizedRGBColor {
+    fn from(f: NormalizedGrayscaleColor) -> Self {
+        NormalizedRGBColor {
+            r: f.v,
+            g: f.v,
+            b: f.v
+        }
+    }
+}
+
+//
 // YCbCr to RGB
 //
 

@@ -23,6 +23,31 @@ pub enum ColorConversionError {
     BufferTooSmall
 }
 
+mod grayscale;
+
+/// Types marked with this trait will be convertible to `DigitalRGBColor`
+pub trait GrayscaleConvertible: From<DigitalGrayscaleColor> {
+    /// Convert a vector of color values into a vector of `DigitalRGBColor` values
+    fn convert_vec_grayscale(items: Vec<Self>) -> Vec<DigitalGrayscaleColor>;
+
+    /// Create an iterator that yields `DigitalRGBColor` values for all input values
+    fn convert_iter_grayscale(items: Box<dyn Iterator<Item = Self>>) -> Box<dyn Iterator<Item = DigitalGrayscaleColor>>;
+}
+
+/// Grayscale color type that is based on `u8`-components
+#[derive(Debug, PartialEq, Clone, Copy)]
+pub struct DigitalGrayscaleColor {
+    /// red component
+    pub v: u8,
+}
+
+/// Grayscale color type with normalized color values (float-components)
+#[derive(Debug, PartialEq, Clone, Copy)]
+pub struct NormalizedGrayscaleColor {
+    /// red component
+    pub v: f32,
+}
+
 mod rgb;
 
 /// Types marked with this trait will be convertible to `DigitalRGBColor`
@@ -33,6 +58,7 @@ pub trait RGBConvertible: From<DigitalRGBColor> {
     /// Create an iterator that yields `DigitalRGBColor` values for all input values
     fn convert_iter_rgb(items: Box<dyn Iterator<Item = Self>>) -> Box<dyn Iterator<Item = DigitalRGBColor>>;
 }
+
 
 /// RGB color type that is based on `u8`-components
 #[derive(Debug, PartialEq, Clone, Copy)]

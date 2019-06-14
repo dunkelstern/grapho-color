@@ -148,6 +148,55 @@ impl Into<u32> for NormalizedRGBAColor {
 }
 
 //
+// Gray to RGBA
+//
+
+impl From<DigitalGrayscaleColor> for DigitalRGBAColor {
+    fn from(f: DigitalGrayscaleColor) -> Self {
+        DigitalRGBAColor {
+            r: f.v,
+            g: f.v,
+            b: f.v,
+            a: 255
+        }
+    }
+}
+
+impl From<DigitalGrayscaleColor> for NormalizedRGBAColor {
+    fn from(f: DigitalGrayscaleColor) -> Self {
+        NormalizedRGBAColor {
+            r: (f.v as f32) / 255.0,
+            g: (f.v as f32) / 255.0,
+            b: (f.v as f32) / 255.0,
+            a: 1.0
+        }
+    }
+}
+
+impl From<NormalizedGrayscaleColor> for DigitalRGBAColor {
+    fn from(f: NormalizedGrayscaleColor) -> Self {
+        DigitalRGBAColor {
+            r: (f.v * 255.0) as u8,
+            g: (f.v * 255.0) as u8,
+            b: (f.v * 255.0) as u8,
+            a: 255
+        }
+    }
+}
+
+impl From<NormalizedGrayscaleColor> for NormalizedRGBAColor {
+    fn from(f: NormalizedGrayscaleColor) -> Self {
+        NormalizedRGBAColor {
+            r: f.v,
+            g: f.v,
+            b: f.v,
+            a: 1.0
+        }
+    }
+}
+
+
+//
 // RGBA to RGBA
 //
 
