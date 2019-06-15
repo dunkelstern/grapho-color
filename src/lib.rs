@@ -3,8 +3,10 @@
 //! 
 //! Currently the following color types are implemented:
 //! 
+//! - Normalized Grayscale (component values from 0.0 - 1.0)
 //! - Normalized RGB (component values from `0.0` to `1.0`)
 //! - Normalized RGBA (component values from `0.0` to `1.0`)
+//! - Digital Grayscale (1 byte)
 //! - Digital RGB (1 byte per channel)
 //! - Digital RGBA (1 byte per channel)
 //! - Normalized YCbCr (component values: Y: `0.0` to `1.0`, Cb/Cr: `-0.5` to `0.5`)
@@ -25,12 +27,12 @@ pub enum ColorConversionError {
 
 mod grayscale;
 
-/// Types marked with this trait will be convertible to `DigitalRGBColor`
+/// Types marked with this trait will be convertible to `DigitalGrayscaleColor`
 pub trait GrayscaleConvertible: From<DigitalGrayscaleColor> {
-    /// Convert a vector of color values into a vector of `DigitalRGBColor` values
+    /// Convert a vector of color values into a vector of `DigitalGrayscaleColor` values
     fn convert_vec_grayscale(items: Vec<Self>) -> Vec<DigitalGrayscaleColor>;
 
-    /// Create an iterator that yields `DigitalRGBColor` values for all input values
+    /// Create an iterator that yields `DigitalGrayscaleColor` values for all input values
     fn convert_iter_grayscale(items: Box<dyn Iterator<Item = Self>>) -> Box<dyn Iterator<Item = DigitalGrayscaleColor>>;
 }
 

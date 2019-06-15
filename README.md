@@ -11,7 +11,7 @@ There is also:
 - `grapho-cv`: computer vision library for grapho stack
 - `grapho-3d`: 3D vector math
 
-## What does it do?
+## What does it do
 
 `grapho-color` describes the color primitives that are used for computer graphics.
 It contains color conversion functionality and will get SIMD acceleration in the future to be the most effective color-library.
